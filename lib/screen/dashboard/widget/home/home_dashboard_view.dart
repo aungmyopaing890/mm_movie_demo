@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/constant/dimesions.dart';
+import '../../../movie/view/now_playing_tab.dart';
 
 class HomeDashboardViewWidget extends StatefulWidget {
   const HomeDashboardViewWidget({super.key});
@@ -54,7 +55,7 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget>
               ),
             ],
         body: TabBarView(controller: _tabController, children: [
-          Container(),
+          const NowPlayingMoviesTab(),
           Container(),
           Container(),
         ]));
