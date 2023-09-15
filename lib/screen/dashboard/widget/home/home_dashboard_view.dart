@@ -6,6 +6,7 @@ import '../../../../core/constant/dimesions.dart';
 import '../../../../core/provider/trending/trending_provider.dart';
 import '../../../../core/repository/trending_repository.dart';
 import '../../../movie/view/now_playing_tab.dart';
+import '../../../movie/view/popular_movies_tab.dart';
 
 class HomeDashboardViewWidget extends StatefulWidget {
   const HomeDashboardViewWidget({super.key});
@@ -76,7 +77,7 @@ class _HomeDashboardViewWidgetState extends State<HomeDashboardViewWidget>
               ],
           body: TabBarView(controller: _tabController, children: [
             const NowPlayingMoviesTab(),
-            Container(),
+            const PopularMoviesTab(),
             Container(),
           ])),
     );
