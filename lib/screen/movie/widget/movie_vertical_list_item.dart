@@ -5,6 +5,7 @@ import 'package:movie_demo/screen/movie/widget/poster.dart';
 import '../../../../../core/constant/dimesions.dart';
 import '../../../config/master_config.dart';
 import '../../../core/viewobject/movie_data.dart';
+import '../view/movie_detail_page.dart';
 
 class MovieVerticalListItem extends StatelessWidget {
   const MovieVerticalListItem({
@@ -62,6 +63,8 @@ class MovieVerticalListItem extends StatelessWidget {
                 )
               ],
             ),
-        openBuilder: (_, open) => Container());
+        openBuilder: (_, open) => DetailPage(
+              movie: movie,
+            ));
   }
 }
