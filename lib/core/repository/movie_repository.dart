@@ -11,4 +11,9 @@ class MovieRepository {
   Future<dynamic> getNowPlaying({required int page}) async {
     return await _apiService!.getNowPlaying(page: page);
   }
+
+  //* Get PopularMovies --------------->
+  Future<dynamic> getPopularMovies({required int page}) async {
+    return await _apiService!.getPopularMovies(page: page);
+  }
 }
