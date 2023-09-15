@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "175090882674",
+    "project_id": "agriculture-lms",
+    "storage_bucket": "agriculture-lms.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175090882674:android:c4da83d0a51a0941028aeb",
+        "android_client_info": {
+          "package_name": "com.hapeyecoltd.agriculturelms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175090882674-m8bs3d8nknrii366sbsroqj389qv7ral.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAI4zx3buXgU6pu0ykuRapglXITSZyyJ3I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175090882674-m8bs3d8nknrii366sbsroqj389qv7ral.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
