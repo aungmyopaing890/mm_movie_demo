@@ -9,7 +9,9 @@ import 'package:provider/provider.dart';
 
 import '../../../config/master_config.dart';
 import '../../../core/provider/genre/genre_provider.dart';
+import '../../../core/provider/movie/favourite_movie_provider.dart';
 import '../../../core/provider/movie/movie_details_provider.dart';
+import '../../../core/repository/favourite_movies_repository.dart';
 import '../../../core/repository/genre_repository.dart';
 import '../../../core/repository/movie_repository.dart';
 import '../widget/detail_page/genres_widget.dart';
@@ -23,6 +25,8 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  late FavouriteMovieProvider favouriteMovieProvider;
+
   late MovieGenreProvider movieGenreProvider;
 
   @override
@@ -31,6 +35,8 @@ class _DetailPageState extends State<DetailPage> {
         Provider.of<MovieRepository>(context);
     final GenreRepository genreRepository =
         Provider.of<GenreRepository>(context);
+    final FavouriteMovieRepository favouriteMovieRepository =
+        Provider.of<FavouriteMovieRepository>(context);
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<MovieGenreProvider>(
@@ -49,6 +55,15 @@ class _DetailPageState extends State<DetailPage> {
                   MovieDetailsProvider(repository: movieRepository);
               provider.loadData(id: widget.movie.id.toString());
               return provider;
+            },
+          ),
+          ChangeNotifierProvider<FavouriteMovieProvider>(
+            lazy: false,
+            create: (BuildContext context) {
+              favouriteMovieProvider =
+                  FavouriteMovieProvider(repository: favouriteMovieRepository);
+              favouriteMovieProvider.getByID(widget.movie.id.toString());
+              return favouriteMovieProvider;
             },
           ),
         ],

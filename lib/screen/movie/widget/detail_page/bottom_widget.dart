@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:movie_demo/core/viewobject/movie_data.dart';
 import 'package:movie_demo/screen/common/customshimmer.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../config/master_config.dart';
 import '../../../../core/constant/dimesions.dart';
+import '../../../../core/provider/movie/favourite_movie_provider.dart';
 import '../poster.dart';
 
 class BottomWidget extends StatelessWidget {
@@ -105,6 +107,28 @@ class BottomWidget extends StatelessWidget {
                             ),
                           ],
                         ),
+                        Consumer<FavouriteMovieProvider>(builder:
+                            (BuildContext context, FavouriteMovieProvider pro,
+                                Widget? child) {
+                          return InkWell(
+                              onTap: () async {
+                                await pro.insert(movie);
+                              },
+                              child: Container(
+                                  margin:
+                                      EdgeInsets.only(top: Dimesion.height10),
+                                  child: pro.isfav
+                                      ? const Icon(
+                                          Icons.favorite,
+                                          color: Colors.white,
+                                          size: 25,
+                                        )
+                                      : const Icon(
+                                          Icons.favorite_outline,
+                                          color: Colors.white,
+                                          size: 25,
+                                        )));
+                        }),
                       ],
                     ),
                   ),
