@@ -20,7 +20,8 @@ class PopularMoviesProvider extends ChangeNotifier {
     isLoading = true;
     var dataMap = await _repository!.getPopularMovies(page: 1);
     moviesList.clear();
-    moviesList.addAll(MovieDataModel.fromJson(dataMap).results!);
+    movieModel = MovieDataModel.fromJson(dataMap);
+    moviesList.addAll(movieModel.results!);
     isLoading = false;
     notifyListeners();
   }

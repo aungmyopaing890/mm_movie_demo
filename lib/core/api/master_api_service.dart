@@ -58,9 +58,7 @@ class MasterApiService {
     };
     var request = http.Request('GET', Uri.parse(url));
     request.headers.addAll(headers);
-
     http.StreamedResponse response = await request.send();
-
     final http.Response res = await http.Response.fromStream(response);
     return json.decode(res.body);
   }
