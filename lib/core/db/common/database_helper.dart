@@ -58,6 +58,62 @@ class DatabaseHelper {
       ''');
   }
 
+  /////////////////////////////////////// Start Movie //////////////////////////////////////
+
+  Future<List<Movie>> fetchMovieData() async {
+    final db = await database;
+    var itemMapList = await db.query(tableMovie, orderBy: "id ASC");
+    return List<Movie>.from(itemMapList.map((x) => Movie.fromJson(x)));
+  }
+
+  Future<int> updateMovie(
+    Movie movie,
+  ) async {
+    var db = await database;
+    var result = await db.update(
+        tableMovie,
+        {
+          MovieFields.id: movie.id,
+          MovieFields.title: movie.title,
+          MovieFields.voteAverage: movie.voteAverage,
+          MovieFields.posterPath: movie.posterPath
+        },
+        where: 'id = ?',
+        whereArgs: [int.parse(movie.id.toString())]);
+    return result;
+  }
+
+  Future<int> deleteMovie(String id) async {
+    var db = await database;
+    return await db.delete(tableMovie, where: 'id = ?', whereArgs: [id]);
+  }
+
+  Future<Movie?> getMovieByID(String id) async {
+    final db = await database;
+    var itemMapList =
+        await db.query(tableMovie, where: 'id = ?', whereArgs: [id]);
+    return itemMapList.isEmpty
+        ? null
+        : List<Movie>.from(itemMapList.map((x) => Movie.fromJson(x))).first;
+  }
+
+  Future<dynamic> insertMovie(Movie user) async {
+    final db = await database;
+    final id = await db.insert(tableMovie, {
+      MovieFields.id: user.id,
+      MovieFields.title: user.title,
+      MovieFields.voteAverage: user.voteAverage,
+      MovieFields.posterPath: user.posterPath,
+    });
+    if (id == 0) {
+      throw 'No rows were inserted to Movies';
+    }
+    return id;
+  }
+
+/////////////////////////////////////// End Movie //////////////////////////////////////
+  ///
+
   close() async {
     var db = await database;
     var result = db.close();
