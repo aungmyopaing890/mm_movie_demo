@@ -51,7 +51,7 @@ class _AppLoadingViewState extends State<AppLoadingView>
                   width: Dimesion.height40 * 5,
                   padding: EdgeInsets.all(Dimesion.height30),
                   decoration: const BoxDecoration(
-                      shape: BoxShape.circle, color: Colors.white),
+                      shape: BoxShape.circle, color: Colors.black),
                   child: Image.asset("assets/images/logo.png"),
                 ),
               ),
