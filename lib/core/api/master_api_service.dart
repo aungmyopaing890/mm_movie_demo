@@ -80,4 +80,20 @@ class MasterApiService {
 
     return json.decode(res.body);
   }
+
+  //* Get Movie Details----------------->
+
+  Future<dynamic> getMovieDetails(String id) async {
+    String url =
+        '${MasterConfig.core_url}/movie/$id?api_key=${MasterConfig.api_token}';
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+    var request = http.Request('GET', Uri.parse(url));
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
+    final http.Response res = await http.Response.fromStream(response);
+    return json.decode(res.body);
+  }
 }

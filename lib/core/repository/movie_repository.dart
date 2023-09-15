@@ -21,4 +21,9 @@ class MovieRepository {
   Future<dynamic> searchMovies(String query) async {
     return await _apiService!.searchMovies(query);
   }
+
+  //* Get MovieDetails --------------->
+  Future<dynamic> getMovieDetails(String id) async {
+    return await _apiService!.getMovieDetails(id);
+  }
 }
