@@ -18,8 +18,8 @@ class MovieRepository {
   }
 
   //* Get searchMovies --------------->
-  Future<dynamic> searchMovies(String query) async {
-    return await _apiService!.searchMovies(query);
+  Future<dynamic> searchMovies(String query, int page) async {
+    return await _apiService!.searchMovies(query, page);
   }
 
   //* Get MovieDetails --------------->

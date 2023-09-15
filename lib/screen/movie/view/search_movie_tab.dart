@@ -15,9 +15,22 @@ class SearchMoviesTab extends StatefulWidget {
 }
 
 class _SearchMoviesTabState extends State<SearchMoviesTab> {
-  late SearchMovieProvider provider;
   TextEditingController searchController = TextEditingController();
   ScrollController scrollController = ScrollController();
+
+  late SearchMovieProvider provider;
+  @override
+  void initState() {
+    super.initState();
+    scrollController = ScrollController();
+
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        provider.loadNextDataList(searchController.text);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +60,7 @@ class _SearchMoviesTabState extends State<SearchMoviesTab> {
                     child: MovieVerticalListView(
                       dataLength: pro.datalength,
                       isLoading: pro.isLoading,
-                      moviesList: pro.nowPlaylist,
+                      moviesList: pro.moviesList,
                       scrollController: scrollController,
                     ),
                   )

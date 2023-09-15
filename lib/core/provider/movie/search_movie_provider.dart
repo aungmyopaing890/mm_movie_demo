@@ -11,24 +11,39 @@ class SearchMovieProvider extends ChangeNotifier {
   }
 
   MovieRepository? _repository;
-  List<Movie> nowPlaylist = <Movie>[];
-  MovieDataModel nowPlayingModel = MovieDataModel();
+  List<Movie> moviesList = <Movie>[];
+  MovieDataModel movieModel = MovieDataModel();
   bool isLoading = false;
+  int page = 1;
+
   Future<void> searchMovies(String quety) async {
     isLoading = true;
-    var dataMap = await _repository!.searchMovies(quety);
-    var data = MovieDataModel.fromJson(dataMap);
-    nowPlaylist.clear();
-    nowPlaylist.addAll(data.results!);
+    var dataMap = await _repository!.searchMovies(quety, 1);
+    movieModel = MovieDataModel.fromJson(dataMap);
+    moviesList.clear();
+    moviesList.addAll(movieModel.results!);
+    isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> loadNextDataList(String quety) async {
+    isLoading = true;
+    int totalPage = movieModel.totalPages ?? 0;
+    if (page < totalPage) {
+      page += 1;
+      var dataMap = await _repository!.searchMovies(quety, 1);
+      movieModel = MovieDataModel.fromJson(dataMap);
+      moviesList.addAll(movieModel.results!);
+    }
     isLoading = false;
     notifyListeners();
   }
 
   bool get hasData {
-    return nowPlaylist.isEmpty ? false : true;
+    return moviesList.isEmpty ? false : true;
   }
 
   int get datalength {
-    return nowPlaylist.length;
+    return moviesList.length;
   }
 }
