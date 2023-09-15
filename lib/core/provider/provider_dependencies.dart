@@ -3,6 +3,8 @@ import 'package:provider/single_child_widget.dart';
 
 import '../api/master_api_service.dart';
 import '../db/common/database_helper.dart';
+import '../repository/favourite_movies_repository.dart';
+import '../repository/genre_repository.dart';
 import '../repository/movie_repository.dart';
 import '../repository/trending_repository.dart';
 
@@ -27,6 +29,18 @@ List<SingleChildWidget> _dependentProviders = <SingleChildWidget>[
     update: (_, MasterApiService apiService, MovieRepository? repository) =>
         MovieRepository(
       apiService: apiService,
+    ),
+  ),
+  ProxyProvider<MasterApiService, GenreRepository>(
+    update: (_, MasterApiService apiService, GenreRepository? repository) =>
+        GenreRepository(
+      apiService: apiService,
+    ),
+  ),
+  ProxyProvider<DatabaseHelper, FavouriteMovieRepository>(
+    update: (_, DatabaseHelper db, FavouriteMovieRepository? repository) =>
+        FavouriteMovieRepository(
+      db: db,
     ),
   ),
 ];
