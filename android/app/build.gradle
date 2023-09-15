@@ -30,14 +30,11 @@ if (keystorePropertiesFile.exists()) {
 
 
 apply plugin: 'com.android.application'
-// START: FlutterFire Configuration
-apply plugin: 'com.google.gms.google-services'
-// END: FlutterFire Configuration
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
-    namespace "com.hapeyecoltd.ecochic"
+    namespace "com.amp.moviedemo"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 

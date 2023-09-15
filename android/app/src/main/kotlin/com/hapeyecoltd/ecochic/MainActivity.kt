@@ -1,4 +1,4 @@
-package com.hapeyecoltd.ecochic
+package com.amp.moviedemo
 
 import io.flutter.embedding.android.FlutterActivity
 
