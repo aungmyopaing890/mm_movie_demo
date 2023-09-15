@@ -96,4 +96,18 @@ class MasterApiService {
     final http.Response res = await http.Response.fromStream(response);
     return json.decode(res.body);
   }
+
+  //* Get Genres----------------->
+  Future<dynamic> getGenres() async {
+    String url = MasterConfig.genres_url;
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+    var request = http.Request('GET', Uri.parse(url));
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
+    final http.Response res = await http.Response.fromStream(response);
+    return json.decode(res.body);
+  }
 }

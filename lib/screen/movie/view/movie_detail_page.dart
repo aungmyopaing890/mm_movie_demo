@@ -8,8 +8,11 @@ import 'package:movie_demo/screen/movie/widget/poster.dart';
 import 'package:provider/provider.dart';
 
 import '../../../config/master_config.dart';
+import '../../../core/provider/genre/genre_provider.dart';
 import '../../../core/provider/movie/movie_details_provider.dart';
+import '../../../core/repository/genre_repository.dart';
 import '../../../core/repository/movie_repository.dart';
+import '../widget/detail_page/genres_widget.dart';
 
 class DetailPage extends StatefulWidget {
   final Movie movie;
@@ -20,14 +23,25 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  bool isFirst = true;
+  late MovieGenreProvider movieGenreProvider;
+
   @override
   Widget build(BuildContext context) {
     final MovieRepository movieRepository =
         Provider.of<MovieRepository>(context);
-
+    final GenreRepository genreRepository =
+        Provider.of<GenreRepository>(context);
     return MultiProvider(
         providers: [
+          ChangeNotifierProvider<MovieGenreProvider>(
+            lazy: false,
+            create: (BuildContext context) {
+              movieGenreProvider =
+                  MovieGenreProvider(repository: genreRepository);
+              movieGenreProvider.loadDataList(movie: widget.movie);
+              return movieGenreProvider;
+            },
+          ),
           ChangeNotifierProvider<MovieDetailsProvider>(
             lazy: false,
             create: (BuildContext context) {
@@ -98,6 +112,9 @@ class _DetailPageState extends State<DetailPage> {
                       isloading: pro.isLoading,
                       movie: pro.movie,
                     )),
+              ),
+              const SliverToBoxAdapter(
+                child: GenresWidget(),
               ),
               SliverToBoxAdapter(
                 child: Column(
