@@ -64,4 +64,20 @@ class MasterApiService {
     final http.Response res = await http.Response.fromStream(response);
     return json.decode(res.body);
   }
+
+  //* Search Movies----------------->
+
+  Future<dynamic> searchMovies(String query) async {
+    String url = '${MasterConfig.search_movie_url}&query=$query';
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    };
+    var request = http.Request('GET', Uri.parse(url));
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
+    final http.Response res = await http.Response.fromStream(response);
+
+    return json.decode(res.body);
+  }
 }

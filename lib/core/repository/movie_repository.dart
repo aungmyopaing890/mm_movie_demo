@@ -16,4 +16,9 @@ class MovieRepository {
   Future<dynamic> getPopularMovies({required int page}) async {
     return await _apiService!.getPopularMovies(page: page);
   }
+
+  //* Get searchMovies --------------->
+  Future<dynamic> searchMovies(String query) async {
+    return await _apiService!.searchMovies(query);
+  }
 }
