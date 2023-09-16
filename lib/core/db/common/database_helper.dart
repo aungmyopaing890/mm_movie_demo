@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -30,9 +31,18 @@ class DatabaseHelper {
 
   Future<Database> initializeDatabase() async {
     sqfliteFfiInit();
-    var databaseFactory = databaseFactoryFfi;
-    Directory directory = await getApplicationDocumentsDirectory();
-    String path = '${directory.path}\\${MasterConfig.app_db_name}';
+    Directory dir = await getApplicationDocumentsDirectory();
+    final dirOfOldAndroidDatabase =
+        Directory("${dir.path}/${MasterConfig.app_db_name}");
+    if (Platform.isAndroid) {
+      if (!await dirOfOldAndroidDatabase.exists()) {
+        await dirOfOldAndroidDatabase.create(recursive: true);
+      }
+    }
+    final path = Platform.isIOS
+        ? join(dir.path, MasterConfig.app_db_name)
+        : join(dir.path.replaceAll("/app_flutter", "/databases"),
+            MasterConfig.app_db_name);
     var myDatabase = await databaseFactory.openDatabase(path,
         options: OpenDatabaseOptions(
             version: 1, onCreate: _createDb, onConfigure: _onConfigure));
