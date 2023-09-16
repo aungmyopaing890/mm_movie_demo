@@ -1,7 +1,7 @@
 # Movie Demo
 Flutter Version : 3.10.6
 
-API : 
+API : <br>
 1.Home NowPlaying Movie Screen<br><br>
-![Home Screen](screenshots/nowplaying%20movies%20screen.png)<br>
+![Home Screen](screenshots/nowplaying_movies_screen.png)<br>
 
